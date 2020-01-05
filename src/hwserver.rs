@@ -2,15 +2,14 @@
 //! 绑定 REP 套接字在 tcp://*:5555
 //! 期待客户端发来“Hello”，然后响应“World”
 
-
 fn main() {
     hw_server();
 }
 
 #[cfg(feature = "feat-libzmq")]
 fn hw_server() {
-    use std::{convert::TryInto, thread::sleep, time::Duration};
     use libzmq::{prelude::*, *};
+    use std::{convert::TryInto, thread::sleep, time::Duration};
 
     let addr: TcpAddr = "0.0.0.0:5555".try_into().unwrap();
 
@@ -29,8 +28,8 @@ fn hw_server() {
 
 #[cfg(feature = "feat-nng")]
 fn hw_server() {
-    use std::{io::Write, thread::sleep, time::Duration};
     use nng::{Protocol, Socket};
+    use std::{io::Write, thread::sleep, time::Duration};
 
     let s = Socket::new(Protocol::Rep0).unwrap();
     s.listen("tcp://0.0.0.0:5555").unwrap();

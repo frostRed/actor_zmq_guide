@@ -10,6 +10,7 @@ edition = "2018"
 libzmq = {version =  "0.2", optional = true}
 nng = {version =  "0.5", optional = true}
 #zmq = {version =  "0.9", optional = true}
+rand = "0.7"
 
 [features]
 feat-nng = ["nng"]
@@ -24,3 +25,11 @@ name = "hwclient"
 [[bin]]
 path = "src/hwserver.rs"
 name = "hwserver"
+
+[[bin]]
+path = "src/wuserver.rs"
+name = "wuserver"
+
+[[bin]]
+path = "src/wuclient.rs"
+name = "wuclient"

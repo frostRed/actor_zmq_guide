@@ -8,8 +8,8 @@ fn main() {
 
 #[cfg(feature = "feat-libzmq")]
 fn hw_client() {
-    use std::convert::TryInto;
     use libzmq::{prelude::*, *};
+    use std::convert::TryInto;
 
     let addr: TcpAddr = "0.0.0.0:5555".try_into().unwrap();
     let client = ClientBuilder::new().connect(addr).build().unwrap();
@@ -24,7 +24,6 @@ fn hw_client() {
 fn hw_client() {
     use nng::{Message, Protocol, Socket};
     use std::io::Write;
-
 
     let s = Socket::new(Protocol::Req0).unwrap();
     s.dial("tcp://0.0.0.0:5555").unwrap();
