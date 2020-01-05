@@ -1,0 +1,26 @@
+[package]
+name = "zmq_guide"
+version = "0.1.0"
+authors = ["Frost Red <frostredlee@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libzmq = {version =  "0.2", optional = true}
+nng = {version =  "0.5", optional = true}
+#zmq = {version =  "0.9", optional = true}
+
+[features]
+feat-nng = ["nng"]
+feat-libzmq = ["libzmq"]
+#feat-zmq = ["zmq"]
+
+
+[[bin]]
+path = "src/hwclient.rs"
+name = "hwclient"
+
+[[bin]]
+path = "src/hwserver.rs"
+name = "hwserver"
