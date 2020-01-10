@@ -33,3 +33,7 @@ name = "wuserver"
 [[bin]]
 path = "src/wuclient.rs"
 name = "wuclient"
+
+[[bin]]
+path = "src/mspoller.rs"
+name = "mspoller"

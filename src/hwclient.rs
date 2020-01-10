@@ -22,19 +22,15 @@ fn hw_client() {
 
 #[cfg(feature = "feat-nng")]
 fn hw_client() {
-    use nng::{Message, Protocol, Socket};
+    use nng::{Message, Protocol, Socket, options::{Options, protocol::pubsub::Subscribe}};
     use std::io::Write;
 
-    let s = Socket::new(Protocol::Req0).unwrap();
-    s.dial("tcp://0.0.0.0:5555").unwrap();
+    let pull = Socket::new(Protocol::Pull0).unwrap();
+    pull.dial("tcp://0.0.0.0:5555").unwrap();
 
-    let mut req = Message::new().unwrap();
-    req.write("Hello".as_bytes()).unwrap();
-    s.send(req).unwrap();
-
-    let msg = s.recv().unwrap();
-    println!(
-        "Received: {:?}",
-        String::from_utf8(msg.as_slice().to_vec()).unwrap()
-    );
+    let sub = Socket::new(Protocol::Sub0).unwrap();
+    sub.dial("tcp://0.0.0.0:5556").unwrap();
+    let filter = "10001";
+    let all_topics = filter.as_bytes().to_vec();
+    sub.set_opt::<Subscribe>(all_topics).unwrap();
 }
